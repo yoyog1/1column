@@ -1,0 +1,174 @@
+@charset "UTF-8";
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+    box-sizing: border-box;
+    text-decoration: none;
+    a:hover {
+        opacity: 0.3;
+    }
+    li{
+        list-style: none;
+    }
+}
+/* // でコメントアウトするとコンパイル後cssに残らない */
+
+$logo-BgColor:rgba(#393E46,1.0);
+$h3-bodColor:#000;
+
+@mixin hedCommon($bg-pos:-600px){
+        
+        display: flex;
+        flex-flow: column ;
+        justify-content:flex-start;
+        align-content: center;
+        >nav{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            >div{
+                background-color:$logo-BgColor;
+                margin: 12px 12px;
+
+                a{display: block;
+                    background-color:$logo-BgColor;
+                    padding: 5px 15px;
+                    
+                    h1{
+                        color: rgba($color: #fff, $alpha: 1.0);
+    
+                    }
+                }
+    
+            }
+            >ul{
+               display: flex;
+               flex-flow: row ;
+               align-items: center;
+               li{
+                   &:last-child{
+                       margin: 0 20px 0 5px;
+                   }
+                  a{
+                      padding: 10px 15px;
+                      color: rgba($color: #000000, $alpha: 1.0);
+                      font-size: .8em;
+                      
+                  } 
+               } 
+            }
+            
+        }
+        >div{
+            background-image: url("img/about-koremade.png");
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: $bg-pos;
+            height: 600px;
+        }
+}
+@mixin secCommon($flex-d:row, $flex-f:wrap,$se2-Box-width:30%,$textInline:block){
+
+    // インナーを上下中央に寄せ
+    section{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-content: center;
+
+        padding: 30px 0;
+        >div.inner{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            h2{
+                line-height: 5em;
+            }
+            content{
+                display: flex;
+                flex-flow: $flex-d $flex-f;
+            }
+        }
+    }
+    #sec1 .content >div{
+        
+        // width: 90%;
+        
+        display: flex;
+        flex-flow: $flex-d $flex-f;
+        align-items: center;
+        justify-content: space-evenly;
+
+        // イメージ
+        >div:first-child img{
+        width: 100px;
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+        >div:last-child{
+            width: 60%;
+            h3,p{
+                display: $textInline;
+            }
+        }
+
+    }
+    #sec2 .content{
+        display: flex;
+        flex-flow:row wrap ;
+        justify-content: center;
+        align-items: flex-start;
+        >div{
+        
+            width: $se2-Box-width;
+            padding: 15px;
+            h3,p{
+                display: $textInline;
+            }    
+            img{
+                width: 100%;
+            }
+        }
+    }
+}
+
+header{
+    // ＼ パソコン ／
+    @media (min-width: 769px) {
+        @include hedCommon(0px);
+
+    }
+    // ／タブレット＼
+    @media (max-width: 768px) {
+        @include hedCommon(0px);
+    }
+    // ／スマホ＼
+    @media (max-width: 640px) {
+        @include hedCommon(0px);
+    }
+}
+main{
+    // ＼ パソコン ／
+    @media (min-width: 769px) {
+        @include secCommon($flex-d:row, $flex-f:wrap);
+
+    }
+    // ／タブレット＼
+    @media (max-width: 768px) {
+        @include secCommon($flex-d:row, $flex-f:wrap);
+    }
+    // ／スマホ＼
+    @media (max-width: 640px) {
+        @include secCommon($flex-d:column, $flex-f:wrap,$se2-Box-width:100%,$textInline:inline-block);
+    }
+}
+
+footer{
+    text-align: center;
+    line-height: 7em;
+
+}
+
